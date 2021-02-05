@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<base target="_top">
+	<style>
+		input {
+			margin: .4rem;
+		}
+
+		button {
+			color: #444444;
+			background: #F3F3F3;
+			border: 1px #DADADA solid;
+			padding: 5px 10px;
+			border-radius: 2px;
+			font-weight: bold;
+			outline: none;
+			font-family: "Open Sans";
+			font-size: 11pt;
+		}
+
+		button:hover {
+			border: 1px #C6C6C6 solid;
+			box-shadow: 1px 1px 1px #EAEAEA;
+			color: #333333;
+			background: #F7F7F7;
+		}
+
+		button:active {
+			box-shadow: inset 1px 1px 1px #DFDFDF;
+		}
+
+		.pretty-text {
+			font-family: "Open Sans";
+			color: rgba(33, 33, 33, 1);
+			font-size: 13pt;
+			line-height: 1.6;
+		}
+
+		.title {
+			border-bottom-width: 12px;
+			border-bottom-style: solid;
+			border-bottom-color: rgba(224, 0, 29, 1);
+			display: block;
+			text-align: center;
+			font-size: 40px;
+		}
+
+		.container {
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 20px;
+			max-width: 1200px;
+			width: 80%;
+		}
+
+		.be-bold {
+			font-weight: bold;
+		}
+
+		.stv-radio-buttons-wrapper {
+			clear: both;
+			display: inline-block;
+			margin-top: 4px;
+			margin-bottom: 12px;
+			font-size: 13px;
+			font-weight: bold;
+		}
+
+		.stv-radio-button {
+			position: absolute;
+			left: -9999em;
+			top: -9999em;
+		}
+
+		.stv-radio-button+label {
+			float: left;
+			padding: 0.5em 1em;
+			cursor: pointer;
+			border: 1px solid #28608f;
+			margin-right: -1px;
+			color: #fff;
+			background-color: #428bca;
+		}
+
+		.stv-radio-button+label:first-of-type {
+			border-radius: 0.7em 0 0 0.7em;
+		}
+
+		.stv-radio-button+label:last-of-type {
+			border-radius: 0 0.7em 0.7em 0;
+		}
+
+		.stv-radio-button:checked+label {
+			background-color: #3277b3;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container pretty-text">
+		<h1 class="title">Generate Employer's Statements</h1>
+		<p>Use this portal to generate ad hoc employer statements. Please fill in all fields correctly. You don't have to
+			account for travel time, as travel time is automatically taken into account. Fields with an asterisk (*) are mandatory.</p>
+		<p>After submitting the form, a link will be generated that you can share with the employee.</p>
+
+		<form id="generateForm" name="generateForm">
+			<label for="reqName">Your name*:</label>
+			<input type="text" id="reqName" name="reqName" required>
+			<br>
+
+			<label for="reason">Reason for generating this form:</label>
+			<input type="text" id="reason" name="reason">
+			<br>
+
+			<label for="name">Employee name*:</label>
+			<input type="text" id="name" name="name" required>
+			<br>
+			<div style="margin-top:10px">
+				<label>What are the working hours of this employee?</label><br>
+				<div class="stv-radio-buttons-wrapper">
+					<input type="radio" class="stv-radio-button" name="workingHours" value="20.5" id="button1" />
+					<label for="button1">Until 20:30</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="21" id="button2" />
+					<label for="button2">Until 21:00</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="21.5" id="button3" />
+					<label for="button3">Until 21:30</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="22" id="button4" />
+					<label for="button4">Until 22:00</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="22.5" id="button5" />
+					<label for="button5">Until 22:30</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="23" id="button6" />
+					<label for="button6">Until 23:00</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="23.5" id="button7" />
+					<label for="button7">Until 23:30</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="0" id="button8" />
+					<label for="button8">Until midnight</label>
+					<input type="radio" class="stv-radio-button" name="workingHours" value="custom" id="button9" checked />
+					<label for="button9">Custom</label>
+				</div>
+			</div>
+			<div id="customdate">
+				<label for="start">Start date*:</label>
+				<input type="date" id="start" name="trip-start" required>
+				<br>
+
+				<label for="start">Start time*:</label>
+				<input type="number" min="0" max="23" id="starthours" placeholder="Hours" required><input type="number" min="0" max="59" id="startminutes" placeholder="Minutes" required>
+				<br>
+
+				<label for="end">End date*:</label>
+				<input type="date" id="end" name="trip-end" required>
+				<br>
+
+				<label for="start">End time*:</label>
+				<input type="number" min="0" max="23" id="endhours" placeholder="Hours" required><input type="number" min="0" max="59" id="endminutes" placeholder="Minutes" required>
+</div>
+
+				<label for="birthdate">Birthday:</label>
+				<input type="date" id="birthdate" name="birthdate">
+				<br>
+
+				<label for="role">Role*:</label>
+				<input type="text" id="role" name="role" required>
+    </form>
+				<br>
+				<button onclick="generate()" id="myButton">Generate Employer's Statement</button>
+				<br>
+				<p id="status"></p>
+			</div>
+			<script>
+function toDateInputValue(date){
+		let local = new Date(date);
+		local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+		return local.toJSON().slice(0, 10);
+}
+
+let rad = document.generateForm.workingHours;
+for (let i = 0; i < rad.length; i++) {
+    rad[i].addEventListener("change", function() {
+        if (this.value == "custom") {
+            document.getElementById("customdate").style.display = "block";
+        } else {
+            document.getElementById("customdate").style.display = "none";
+            const curTime = parseFloat(this.value);
+            const curHours = parseInt(curTime);
+            const curMinutes = parseInt((curTime % 1) * 60);
+            document.getElementById("start").value = toDateInputValue(new Date());
+            document.getElementById("end").value = toDateInputValue(curHours < 7 ? new Date(new Date().getTime() + hours(24)) : new Date());
+            document.getElementById("starthours").value = 20;
+            document.getElementById("endhours").value = curHours;
+            document.getElementById("startminutes").value = 00;
+            document.getElementById("endminutes").value = curMinutes;
+        }
+    });
+}
+
+// The date input fields start on the current date
+document.getElementById("start").value = toDateInputValue(new Date());
+document.getElementById("end").value = toDateInputValue(new Date());
+
+// It is not possible to create employer's statements for the past
+document.getElementById("start").min = toDateInputValue(new Date());
+document.getElementById("end").min = toDateInputValue(new Date());
+
+// We constrain creating statements for more than 7 days ahead, to avoid abuse
+document.getElementById("start").max = toDateInputValue(daysFromNow(7));
+document.getElementById("end").max = toDateInputValue(daysFromNow(7));
+
+function generate() {
+  var form = document.getElementById("generateForm");
+    if (form.checkValidity()) {
+        document.getElementById("myButton").disabled = true;
+        document.getElementById("status").innerHTML = "Employer's statement is being generated... Please be patient!";
+        document.getElementById("status").scrollIntoView();
+        readFormAndGenerateStatement();
+    } else {
+        const list = form.querySelectorAll(":invalid");
+        for (let item of list) {
+            item.focus();
+        }
+    }
+}
+
+function readFormAndGenerateStatement() {
+    const start = readDateTime("start");
+    const end = readDateTime("end");
+    if (start >= end) {
+        showResult("<b>Error!</b> Start date must be before end date!");
+        return;
+    }
+
+    const name = document.getElementById("name").value;
+    const reason = document.getElementById("reason").value;
+    let birthdate = document.getElementById("birthdate").valueAsDate;
+    if (birthdate == null) birthdate = "";
+    const role = document.getElementById("role").value;
+    const reqName = document.getElementById("reqName").value;
+    generateScript(reason, name, start, end, birthdate, role, reqName);
+}
+
+function readDateTime(name) {
+    const datetime = document.getElementById(name).valueAsDate;
+    datetime.setHours(document.getElementById(name + "hours").value);
+    datetime.setMinutes(document.getElementById(name + "minutes").value);
+    return datetime;
+}
+
+function showResult(res) {
+    document.getElementById("myButton").disabled = false;
+    document.getElementById("status").innerHTML = res;
+}
+
+function generateScript(reason, name, start, end, birthdate, role, reqName) {
+    google.script.run.withSuccessHandler(showResult).withFailureHandler(generateError).generateStatementWebapp(reason, name, start.getTime(), end.getTime(), birthdate == "" ? "" : birthdate.getTime(), role, reqName);
+}
+
+function generateError(e) {
+    console.log(e);
+    showResult("<b>Error!</b> An unexpected error occurred while generating. Please check the console for more details.");
+}
+
+function hours(num) {
+    return parseInt(num * 60 * 60 * 1000);
+}
+
+function daysFromNow(days) {
+    return shiftDate(new Date(), 24 * days);
+}
+
+function shiftDate(date, hoursShifted) {
+    return new Date(date.getTime() + hours(hoursShifted));
+}
+			</script>
+</body>
+
+</html>
